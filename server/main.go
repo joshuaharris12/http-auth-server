@@ -5,11 +5,14 @@ import (
 	"net/http" 
 	"io/ioutil"
 	"golang.org/x/time/rate"
+	"fmt"
 )
 
 func main() {
+	port := 8080
 	http.HandleFunc("/authenticated", requiredAuthRequestHandler)
-	http.ListenAndServe(":8080", nil)
+	fmt.Printf("Server Running on port: %d", port)
+	http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
 }
 
 func requiredAuthRequestHandler(w http.ResponseWriter, r *http.Request) {
